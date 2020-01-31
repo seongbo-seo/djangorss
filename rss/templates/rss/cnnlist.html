@@ -1,0 +1,33 @@
+{% extends 'rss/base.html' %}
+
+ 
+
+{% block body %}
+
+
+
+{% if listcnn %}
+
+{% for item in listcnn %}
+
+
+news
+
+</div>
+
+<h5 class="card-title">Headline: {{ item.title }}</h5>
+
+<p class="card-text">Description: {{ item.content }}</p>
+
+<a href="{{ item.link }}" class="btn btn-primary">Visit Link</a>
+
+</div>
+
+</div><p>{{ item.time }}</p>
+
+{% endfor %}
+
+{% endif %}
+
+
+{% endblock %}
