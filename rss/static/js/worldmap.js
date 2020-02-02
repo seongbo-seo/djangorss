@@ -1,3 +1,4 @@
+am4core.useTheme(am4themes_animated);
 
 // Create map instance
 var chart = am4core.create("chartdiv1", am4maps.MapChart);
@@ -21,7 +22,6 @@ polygonTemplate.fillOpacity = 0.6;
 
 // Create hover state and set alternative fill color
 var hs = polygonTemplate.states.create("hover");
-
 hs.properties.fillOpacity = 0.9;
 
 // Remove Antarctica
@@ -32,6 +32,11 @@ polygonTemplate.propertyFields.fill = "fill";
 polygonTemplate.propertyFields.fill = "fill1";
 hs.propertyFields.fill = "fill1";
 
+// Disable zoom and pan
+chart.maxZoomLevel = 1;
+chart.seriesContainer.draggable = false;
+chart.seriesContainer.resizable = false;
+
 /* Create a heat rule */
 polygonSeries.heatRules.push({
   property: "fill",
@@ -40,23 +45,19 @@ polygonSeries.heatRules.push({
   max: am4core.color("#800000")
 });
 
-
 /* Create a heat legend */
 // add heat legend
 var heatLegend = chart.chartContainer.createChild(am4maps.HeatLegend);
 heatLegend.valign = "bottom";
 heatLegend.align = "left";
-heatLegend.width = am4core.percent(100);
+heatLegend.width = am4core.percent(40);
 heatLegend.series = polygonSeries;
-heatLegend.orientation = "horizontal";
+heatLegend.orientation = "vertical";
 heatLegend.padding(20, 20, 20, 20);
 heatLegend.valueAxis.renderer.labels.template.fontSize = 10;
 heatLegend.valueAxis.renderer.minGridDistance = 40;
 heatLegend.minValue = 0;
 heatLegend.maxValue = 12000;
-
-
-
 
 // Add some data
 polygonSeries.data = [{
